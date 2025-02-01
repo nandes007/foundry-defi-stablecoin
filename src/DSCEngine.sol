@@ -82,7 +82,7 @@ contract DSCEngine is ReentrancyGuard {
      */
     event CollateralDeposited(address indexed user, address indexed token, uint256 indexed amount);
     event CollateralRedeemed(
-        address indexed redeemFrom, address indexed redeemTo, address indexed token, uint256 amount
+        address indexed redeemFrom, address indexed redeemTo, address token, uint256 amount
     );
 
     /**
