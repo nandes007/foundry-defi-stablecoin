@@ -378,4 +378,8 @@ contract DSCEngine is ReentrancyGuard {
     function getPrecision() public pure returns (uint256) {
         return PRECISION;
     }
+
+    function getLiquidationBonus() public pure returns (uint256) {
+        return LIQUIDATION_BONUS;
+    }
 }
