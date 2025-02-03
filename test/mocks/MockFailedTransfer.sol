@@ -5,30 +5,30 @@ import {ERC20Burnable, ERC20} from "@openzeppelin/contracts/token/ERC20/extensio
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract MockFailedTransfer is ERC20Burnable, Ownable(msg.sender) {
-   error DecentralizedStableCoin__AmountMustBeMoreThanZero();
-   error DecentralizedStableCoin__BurnAmountExceedsBalance();
-   error DecentralizedStableCoin__NotZeroAddress();
-   
-   constructor() ERC20("DecentralizedStableCoin", "DSC") { }
+    error DecentralizedStableCoin__AmountMustBeMoreThanZero();
+    error DecentralizedStableCoin__BurnAmountExceedsBalance();
+    error DecentralizedStableCoin__NotZeroAddress();
 
-   function burn(uint256 _amount) public override onlyOwner {
-      uint256 balance = balanceOf(msg.sender);
-      if (_amount <= 0) {
-         revert DecentralizedStableCoin__AmountMustBeMoreThanZero();
-      }
+    constructor() ERC20("DecentralizedStableCoin", "DSC") {}
 
-      if (balance < _amount) {
-         revert DecentralizedStableCoin__BurnAmountExceedsBalance();
-      }
+    function burn(uint256 _amount) public override onlyOwner {
+        uint256 balance = balanceOf(msg.sender);
+        if (_amount <= 0) {
+            revert DecentralizedStableCoin__AmountMustBeMoreThanZero();
+        }
 
-      super.burn(_amount);
-   }
+        if (balance < _amount) {
+            revert DecentralizedStableCoin__BurnAmountExceedsBalance();
+        }
 
-   function mint(address account, uint256 amount) public {
-      _mint(account, amount);
-   }
+        super.burn(_amount);
+    }
 
-   function transfer(address, /*recipient*/ uint256 /*amount*/) public pure override returns (bool) {
-      return false;
-   }
+    function mint(address account, uint256 amount) public {
+        _mint(account, amount);
+    }
+
+    function transfer(address, /*recipient*/ uint256 /*amount*/ ) public pure override returns (bool) {
+        return false;
+    }
 }
